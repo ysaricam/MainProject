@@ -1,0 +1,16 @@
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/bin/Debug/net9.0/MainProject.Application.deps.json
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/bin/Debug/net9.0/MainProject.Application.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/bin/Debug/net9.0/MainProject.Application.pdb
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/bin/Debug/net9.0/MainProject.Domain.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/bin/Debug/net9.0/MainProject.Domain.pdb
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.csproj.AssemblyReference.cache
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.AssemblyInfoInputs.cache
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.AssemblyInfo.cs
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.csproj.CoreCompileInputs.cache
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.sourcelink.json
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProj.F9E3FE83.Up2Date
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/refint/MainProject.Application.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/MainProject.Application.pdb
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/Debug/net9.0/ref/MainProject.Application.dll

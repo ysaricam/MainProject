@@ -4,14 +4,83 @@
     "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj": {}
   },
   "projects": {
-    "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj": {
+    "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/MainProject.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj",
-        "projectName": "MainProject.Infrastructure",
-        "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj",
+        "projectUniqueName": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/MainProject.Application.csproj",
+        "projectName": "MainProject.Application",
+        "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/MainProject.Application.csproj",
         "packagesPath": "/Users/yasin/.nuget/packages/",
-        "outputPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/obj/",
+        "outputPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yasin/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/MainProject.Domain.csproj": {
+                "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/MainProject.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[13.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/MainProject.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/MainProject.Domain.csproj",
+        "projectName": "MainProject.Domain",
+        "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/MainProject.Domain.csproj",
+        "packagesPath": "/Users/yasin/.nuget/packages/",
+        "outputPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/yasin/.nuget/NuGet/NuGet.Config"
@@ -43,6 +112,75 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj",
+        "projectName": "MainProject.Infrastructure",
+        "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/MainProject.Infrastructure.csproj",
+        "packagesPath": "/Users/yasin/.nuget/packages/",
+        "outputPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yasin/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/MainProject.Application.csproj": {
+                "projectPath": "/Users/yasin/Desktop/Projeler/MainProject/MainProject.Application/MainProject.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

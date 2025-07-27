@@ -1,10 +1,11 @@
 using MainProject.Domain.Common;
+using MainProject.Domain.Interfaces;
 using MainProject.Domain.Postings;
 using System.Collections.Generic;
 
 namespace MainProject.Domain.Users;
 
-public class User : BaseEntity
+public class User : BaseEntity, IAggregateRoot
 {
     public string Username { get; set; }
     public string Email { get; set; }
