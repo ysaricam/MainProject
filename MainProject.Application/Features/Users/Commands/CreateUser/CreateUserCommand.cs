@@ -1,12 +1,12 @@
-
 using MediatR;
+using System;
 
 namespace MainProject.Application.Features.Users.Commands.CreateUser
 {
-    public class CreateUserCommand : IRequest<Guid>
+    public record CreateUserCommand : IRequest<Guid>
     {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Username { get; init; }
+        public string Email { get; init; }
+        public string Password { get; init; }
     }
 }

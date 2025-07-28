@@ -1,0 +1,109 @@
+using MainProject.Application.Features.Users.Commands.CreateUser;
+using MainProject.Application.Features.Users.Commands.DeleteUser;
+using MainProject.Application.Features.Users.Commands.UpdateUser;
+using MainProject.Application.Features.Users.Queries.GetAllUsers;
+using MainProject.Application.Features.Users.Queries.GetUserById;
+using MainProject.Application.Features.Users.Dtos;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MainProject.Presentation.Controllers
+{
+    /// <summary>
+    /// Controller for managing users
+    /// </summary>
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private readonly ISender _mediator;
+
+        public UsersController(ISender mediator)
+        {
+            _mediator = mediator;
+        }
+
+        /// <summary>
+        /// Retrieves all users
+        /// </summary>
+        /// <returns>List of all users</returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<UserDto>>> GetAll()
+        {
+            var query = new GetAllUsersQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Gets a user by ID
+        /// </summary>
+        /// <param name="id">The ID of the user to retrieve</param>
+        /// <returns>The user details</returns>
+        [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserDto>> GetById(Guid id)
+        {
+            var query = new GetUserByIdQuery { Id = id };
+            var result = await _mediator.Send(query);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Creates a new user
+        /// </summary>
+        /// <param name="command">User creation details</param>
+        /// <returns>The ID of the created user</returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateUserCommand command)
+        {
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id }, id);
+        }
+
+        /// <summary>
+        /// Updates an existing user
+        /// </summary>
+        /// <param name="id">The ID of the user to update</param>
+        /// <param name="command">The updated user details</param>
+        /// <returns>No content if successful</returns>
+        [HttpPut("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest();
+
+            var success = await _mediator.Send(command);
+            if (!success)
+                return NotFound();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Deletes a user
+        /// </summary>
+        /// <param name="id">The ID of the user to delete</param>
+        /// <returns>No content if successful</returns>
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var command = new DeleteUserCommand(id);
+            await _mediator.Send(command);
+            return NoContent();
+        }
+    }
+}

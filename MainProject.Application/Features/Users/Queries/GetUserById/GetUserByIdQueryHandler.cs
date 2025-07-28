@@ -1,4 +1,4 @@
-
+using MainProject.Application.Features.Users.Dtos;
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -19,11 +19,9 @@ namespace MainProject.Application.Features.Users.Queries.GetUserById
         public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByIdAsync(request.Id, cancellationToken);
-
+            
             if (user == null)
-            {
                 return null;
-            }
 
             return new UserDto
             {
@@ -33,11 +31,5 @@ namespace MainProject.Application.Features.Users.Queries.GetUserById
             };
         }
     }
-
-    public class UserDto
-    {
-        public Guid Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-    }
 }
+

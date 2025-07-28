@@ -1,11 +1,11 @@
-
+using MainProject.Application.Features.Users.Dtos;
 using MediatR;
 using System;
 
 namespace MainProject.Application.Features.Users.Queries.GetUserById
 {
-    public class GetUserByIdQuery : IRequest<UserDto>
+    public record GetUserByIdQuery : IRequest<UserDto>
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MainProject.Presentation</name>
+    </assembly>
+    <members>
+        <member name="M:MainProject.Presentation.Controllers.BranchesController.GetById(System.Guid)">
+            <summary>
+            Gets a branch by ID
+            </summary>
+            <param name="id">The ID of the branch to retrieve</param>
+            <returns>The branch details</returns>
+        </member>
+        <member name="T:MainProject.Presentation.Controllers.UsersController">
+            <summary>
+            Controller for managing users
+            </summary>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.GetAll">
+            <summary>
+            Retrieves all users
+            </summary>
+            <returns>List of all users</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.GetById(System.Guid)">
+            <summary>
+            Gets a user by ID
+            </summary>
+            <param name="id">The ID of the user to retrieve</param>
+            <returns>The user details</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.Create(MainProject.Application.Features.Users.Commands.CreateUser.CreateUserCommand)">
+            <summary>
+            Creates a new user
+            </summary>
+            <param name="command">User creation details</param>
+            <returns>The ID of the created user</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.Update(System.Guid,MainProject.Application.Features.Users.Commands.UpdateUser.UpdateUserCommand)">
+            <summary>
+            Updates an existing user
+            </summary>
+            <param name="id">The ID of the user to update</param>
+            <param name="command">The updated user details</param>
+            <returns>No content if successful</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.Delete(System.Guid)">
+            <summary>
+            Deletes a user
+            </summary>
+            <param name="id">The ID of the user to delete</param>
+            <returns>No content if successful</returns>
+        </member>
+    </members>
+</doc>

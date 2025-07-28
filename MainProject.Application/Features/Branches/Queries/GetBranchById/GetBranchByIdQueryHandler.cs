@@ -1,6 +1,6 @@
-
-using MainProject.Domain.Lessons;
+using MainProject.Application.Features.Branches.Dtos;
 using MainProject.Domain.Interfaces;
+using MainProject.Domain.Lessons;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,12 +32,5 @@ namespace MainProject.Application.Features.Branches.Queries.GetBranchById
                 Description = branch.Description
             };
         }
-    }
-
-    public class BranchDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 }
