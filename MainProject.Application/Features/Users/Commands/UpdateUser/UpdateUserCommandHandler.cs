@@ -1,6 +1,7 @@
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
+using BCrypt.Net;
 
 namespace MainProject.Application.Features.Users.Commands.UpdateUser
 {
@@ -23,6 +24,11 @@ namespace MainProject.Application.Features.Users.Commands.UpdateUser
 
             user.Username = request.Username;
             user.Email = request.Email;
+
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            }
 
             _userRepository.Update(user);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

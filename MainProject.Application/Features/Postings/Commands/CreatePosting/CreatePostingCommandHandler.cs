@@ -2,6 +2,7 @@
 using MainProject.Domain.Postings;
 using MainProject.Domain.Interfaces;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,14 +25,16 @@ namespace MainProject.Application.Features.Postings.Commands.CreatePosting
             {
                 Title = request.Title,
                 Content = request.Content,
+                Capacity = request.Capacity,
                 LessonId = request.LessonId,
                 TeacherId = request.TeacherId
             };
 
             _postingRepository.Add(posting);
-
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             return posting.Id;
         }
     }
 }
+

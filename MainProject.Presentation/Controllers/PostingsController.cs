@@ -1,6 +1,7 @@
 using MainProject.Application.Features.Postings.Commands.CreatePosting;
 using MainProject.Application.Features.Postings.Commands.DeletePosting;
 using MainProject.Application.Features.Postings.Commands.UpdatePosting;
+using MainProject.Application.Features.Postings.Commands.EnrollStudent;
 using MainProject.Application.Features.Postings.Queries.GetAllPostings;
 using MainProject.Application.Features.Postings.Queries.GetPostingById;
 using MediatR;
@@ -10,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace MainProject.Presentation.Controllers
 {
+    public class EnrollStudentRequest
+    {
+        public Guid StudentId { get; set; }
+    }
+
     [ApiController]
     [Route("api/[controller]")]
     public class PostingsController : ControllerBase
@@ -48,7 +54,9 @@ namespace MainProject.Presentation.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePostingCommand command)
         {
             if (id != command.Id)
-                return BadRequest();
+            {
+                command.Id = id;
+            }
 
             var result = await _mediator.Send(command);
             if (!result)
@@ -62,6 +70,22 @@ namespace MainProject.Presentation.Controllers
         {
             var command = new DeletePostingCommand(id);
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPost("{id:guid}/enroll")]
+        public async Task<IActionResult> EnrollStudent(Guid id, [FromBody] EnrollStudentRequest request)
+        {
+            var command = new EnrollStudentToPostingCommand
+            {
+                PostingId = id,
+                StudentId = request.StudentId
+            };
+
+            var result = await _mediator.Send(command);
+            if (!result)
+                return NotFound();
+
             return NoContent();
         }
     }

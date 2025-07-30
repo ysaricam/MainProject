@@ -49,10 +49,12 @@ namespace MainProject.Presentation.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateRoleCommand command)
         {
             if (id != command.Id)
-                return BadRequest();
+            {
+                command.Id = id;
+            }
 
-            var success = await _mediator.Send(command);
-            if (!success)
+            var result = await _mediator.Send(command);
+            if (!result)
                 return NotFound();
 
             return NoContent();

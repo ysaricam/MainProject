@@ -65,7 +65,10 @@ namespace MainProject.Presentation.Controllers
                 Name = request.Name,
                 Description = request.Description
             };
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+            if (!result)
+                return NotFound();
+
             return NoContent();
         }
 

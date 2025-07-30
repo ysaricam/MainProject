@@ -1,6 +1,7 @@
 using MainProject.Application.Features.Lessons.Commands.CreateLesson;
 using MainProject.Application.Features.Lessons.Commands.DeleteLesson;
 using MainProject.Application.Features.Lessons.Commands.UpdateLesson;
+using MainProject.Application.Features.Lessons.Commands.AddEducationLevel;
 using MainProject.Application.Features.Lessons.Queries.GetAllLessons;
 using MainProject.Application.Features.Lessons.Queries.GetLessonById;
 using MediatR;
@@ -10,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace MainProject.Presentation.Controllers
 {
+    public class AddEducationLevelRequest
+    {
+        public Guid EducationLevelId { get; set; }
+    }
 
     [ApiController]
     [Route("api/[controller]")]
@@ -55,7 +60,9 @@ namespace MainProject.Presentation.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateLessonCommand command)
         {
             if (id != command.Id)
-                return BadRequest();
+            {
+                command.Id = id;
+            }
 
             var result = await _mediator.Send(command);
             if (!result)
@@ -69,6 +76,22 @@ namespace MainProject.Presentation.Controllers
         {
             var command = new DeleteLessonCommand(id);
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPost("{id:guid}/educationlevels")]
+        public async Task<IActionResult> AddEducationLevel(Guid id, [FromBody] AddEducationLevelRequest request)
+        {
+            var command = new AddEducationLevelToLessonCommand
+            {
+                LessonId = id,
+                EducationLevelId = request.EducationLevelId
+            };
+
+            var result = await _mediator.Send(command);
+            if (!result)
+                return NotFound();
+
             return NoContent();
         }
     }

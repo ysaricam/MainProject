@@ -167,3 +167,4 @@
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/obj/Debug/net9.0/MainProject.Presentation.pdb
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/obj/Debug/net9.0/MainProject.Presentation.genruntimeconfig.cache
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/obj/Debug/net9.0/ref/MainProject.Presentation.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/BCrypt.Net-Next.dll

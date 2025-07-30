@@ -4,6 +4,7 @@ using MainProject.Domain.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using BCrypt.Net;
 
 namespace MainProject.Application.Features.Users.Commands.CreateUser
 {
@@ -24,7 +25,7 @@ namespace MainProject.Application.Features.Users.Commands.CreateUser
             {
                 Username = request.Username,
                 Email = request.Email,
-                PasswordHash = request.Password // Note: Hash the password in a real application
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
             };
 
             _userRepository.Add(user);

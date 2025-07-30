@@ -11,6 +11,11 @@
             <param name="id">The ID of the branch to retrieve</param>
             <returns>The branch details</returns>
         </member>
+        <member name="T:MainProject.Presentation.Controllers.AssignRoleRequest">
+            <summary>
+            DTO for the assign role request
+            </summary>
+        </member>
         <member name="T:MainProject.Presentation.Controllers.UsersController">
             <summary>
             Controller for managing users
@@ -50,6 +55,21 @@
             </summary>
             <param name="id">The ID of the user to delete</param>
             <returns>No content if successful</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.AssignRole(System.Guid,MainProject.Presentation.Controllers.AssignRoleRequest)">
+            <summary>
+            Assigns a role to a user
+            </summary>
+            <param name="userId">The ID of the user</param>
+            <param name="request">The role to assign</param>
+            <returns>No content if successful</returns>
+        </member>
+        <member name="M:MainProject.Presentation.Controllers.UsersController.Login(MainProject.Application.Features.Users.Commands.LoginUser.LoginUserCommand)">
+            <summary>
+            Authenticates a user and returns a token.
+            </summary>
+            <param name="command">The login credentials.</param>
+            <returns>A JWT token if authentication is successful.</returns>
         </member>
     </members>
 </doc>

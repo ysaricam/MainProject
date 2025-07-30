@@ -1,15 +1,25 @@
 using MainProject.Application.Features.Users.Commands.CreateUser;
 using MainProject.Application.Features.Users.Commands.DeleteUser;
 using MainProject.Application.Features.Users.Commands.UpdateUser;
+using MainProject.Application.Features.Users.Commands.AssignRoleToUser;
 using MainProject.Application.Features.Users.Queries.GetAllUsers;
 using MainProject.Application.Features.Users.Queries.GetUserById;
 using MainProject.Application.Features.Users.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MainProject.Application.Features.Users.Commands.LoginUser;
 
 namespace MainProject.Presentation.Controllers
 {
+    /// <summary>
+    /// DTO for the assign role request
+    /// </summary>
+    public class AssignRoleRequest
+    {
+        public Guid RoleId { get; set; }
+    }
+
     /// <summary>
     /// Controller for managing users
     /// </summary>
@@ -82,7 +92,9 @@ namespace MainProject.Presentation.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserCommand command)
         {
             if (id != command.Id)
-                return BadRequest();
+            {
+                command.Id = id;
+            }
 
             var success = await _mediator.Send(command);
             if (!success)
@@ -104,6 +116,48 @@ namespace MainProject.Presentation.Controllers
             var command = new DeleteUserCommand(id);
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Assigns a role to a user
+        /// </summary>
+        /// <param name="userId">The ID of the user</param>
+        /// <param name="request">The role to assign</param>
+        /// <returns>No content if successful</returns>
+        [HttpPost("{userId:guid}/roles")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AssignRole(Guid userId, [FromBody] AssignRoleRequest request)
+        {
+            var command = new AssignRoleToUserCommand
+            {
+                UserId = userId,
+                RoleId = request.RoleId
+            };
+
+            var success = await _mediator.Send(command);
+            if (!success)
+                return NotFound();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Authenticates a user and returns a token.
+        /// </summary>
+        /// <param name="command">The login credentials.</param>
+        /// <returns>A JWT token if authentication is successful.</returns>
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result == "Invalid username or password")
+            {
+                return Unauthorized(result);
+            }
+            return Ok(new { Token = result });
         }
     }
 }
