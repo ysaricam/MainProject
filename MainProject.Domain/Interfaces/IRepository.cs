@@ -11,6 +11,7 @@ namespace MainProject.Domain.Interfaces
     {
         Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<T> GetByUsernameAsync(string username, CancellationToken cancellationToken = default);
+        Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default);
         Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default);
         void Add(T entity);
         void Update(T entity);

@@ -1,11 +1,14 @@
+using FluentValidation;
 using MainProject.Application;
 using MainProject.Domain.Interfaces;
 using MainProject.Infrastructure;
-using MainProject.Infrastructure.Repositories; 
+using MainProject.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using FluentValidation.AspNetCore;
+using MainProject.Presentation.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +42,14 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddMediatR(cfg => 
     cfg.RegisterServicesFromAssembly(typeof(MainProject.Application.AssemblyReference).Assembly));
 
+builder.Services.AddValidatorsFromAssembly(typeof(MainProject.Application.AssemblyReference).Assembly);
+builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddAutoMapper(typeof(MainProject.Application.AssemblyReference).Assembly);
+
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 // Development ortamı için ek ayarlar
 if (app.Environment.IsDevelopment())

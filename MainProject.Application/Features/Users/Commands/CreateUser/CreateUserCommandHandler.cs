@@ -5,6 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using BCrypt.Net;
+using System;
 
 namespace MainProject.Application.Features.Users.Commands.CreateUser
 {
@@ -21,6 +22,18 @@ namespace MainProject.Application.Features.Users.Commands.CreateUser
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var existingUserByUsername = await _userRepository.GetByUsernameAsync(request.Username, cancellationToken);
+            if (existingUserByUsername != null)
+            {
+                throw new InvalidOperationException("The specified username already exists.");
+            }
+
+            var isEmailUnique = await _userRepository.IsEmailUniqueAsync(request.Email, cancellationToken);
+            if (!isEmailUnique)
+            {
+                throw new InvalidOperationException("The specified email already exists.");
+            }
+
             var user = new User
             {
                 Username = request.Username,

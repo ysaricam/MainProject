@@ -168,3 +168,8 @@
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/obj/Debug/net9.0/MainProject.Presentation.genruntimeconfig.cache
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/obj/Debug/net9.0/ref/MainProject.Presentation.dll
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/BCrypt.Net-Next.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/FluentValidation.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/FluentValidation.AspNetCore.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/AutoMapper.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

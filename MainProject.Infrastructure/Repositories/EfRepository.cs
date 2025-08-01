@@ -27,6 +27,11 @@ namespace MainProject.Infrastructure.Repositories
             return await _dbContext.Set<User>().FirstOrDefaultAsync(u => u.Username == username, cancellationToken) as T;
         }
 
+        public async Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default)
+        {
+            return !await _dbContext.Set<User>().AnyAsync(u => u.Email == email, cancellationToken);
+        }
+
         public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().ToListAsync(cancellationToken);
