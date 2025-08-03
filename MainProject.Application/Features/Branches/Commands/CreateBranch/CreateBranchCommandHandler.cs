@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using MainProject.Domain.Lessons;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -11,21 +12,19 @@ namespace MainProject.Application.Features.Branches.Commands.CreateBranch
     {
         private readonly IRepository<Branch> _branchRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
 
-        public CreateBranchCommandHandler(IRepository<Branch> branchRepository, IUnitOfWork unitOfWork)
+        public CreateBranchCommandHandler(IRepository<Branch> branchRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _branchRepository = branchRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(CreateBranchCommand request, CancellationToken cancellationToken)
         {
-            var branch = new Branch
-            {
-                Name = request.Name,
-                Description = request.Description
-            };
+            var branch = _mapper.Map<Branch>(request);
 
             _branchRepository.Add(branch);
 

@@ -1,4 +1,7 @@
 
+
+using AutoMapper;
+using MainProject.Application.Features.Roles.Dtos;
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -10,10 +13,12 @@ namespace MainProject.Application.Features.Roles.Queries.GetRoleById
     public class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, RoleDto>
     {
         private readonly IRepository<Role> _roleRepository;
+        private readonly IMapper _mapper;
 
-        public GetRoleByIdQueryHandler(IRepository<Role> roleRepository)
+        public GetRoleByIdQueryHandler(IRepository<Role> roleRepository, IMapper mapper)
         {
             _roleRepository = roleRepository;
+            _mapper = mapper;
         }
 
         public async Task<RoleDto> Handle(GetRoleByIdQuery request, CancellationToken cancellationToken)
@@ -25,17 +30,8 @@ namespace MainProject.Application.Features.Roles.Queries.GetRoleById
                 return null;
             }
 
-            return new RoleDto
-            {
-                Id = role.Id,
-                Name = role.Name
-            };
+            return _mapper.Map<RoleDto>(role);
         }
     }
-
-    public class RoleDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-    }
 }
+

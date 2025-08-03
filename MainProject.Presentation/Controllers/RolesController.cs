@@ -3,7 +3,9 @@ using MainProject.Application.Features.Roles.Commands.DeleteRole;
 using MainProject.Application.Features.Roles.Commands.UpdateRole;
 using MainProject.Application.Features.Roles.Queries.GetAllRoles;
 using MainProject.Application.Features.Roles.Queries.GetRoleById;
+using MainProject.Application.Features.Roles.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace MainProject.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class RolesController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -39,6 +42,7 @@ namespace MainProject.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateRoleCommand command)
         {
             var roleId = await _mediator.Send(command);
@@ -46,6 +50,7 @@ namespace MainProject.Presentation.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateRoleCommand command)
         {
             if (id != command.Id)
@@ -61,6 +66,7 @@ namespace MainProject.Presentation.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var success = await _mediator.Send(new DeleteRoleCommand(id));

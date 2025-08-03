@@ -1,3 +1,4 @@
+using AutoMapper;
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -9,11 +10,13 @@ namespace MainProject.Application.Features.Users.Commands.UpdateUser
     {
         private readonly IRepository<User> _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateUserCommandHandler(IRepository<User> userRepository, IUnitOfWork unitOfWork)
+        public UpdateUserCommandHandler(IRepository<User> userRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
@@ -22,8 +25,7 @@ namespace MainProject.Application.Features.Users.Commands.UpdateUser
             if (user == null)
                 return false;
 
-            user.Username = request.Username;
-            user.Email = request.Email;
+            _mapper.Map(request, user);
 
             if (!string.IsNullOrWhiteSpace(request.Password))
             {

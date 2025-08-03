@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -13,11 +14,13 @@ namespace MainProject.Application.Features.Users.Commands.CreateUser
     {
         private readonly IRepository<User> _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IRepository<User> userRepository, IUnitOfWork unitOfWork)
+        public CreateUserCommandHandler(IRepository<User> userRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -34,12 +37,8 @@ namespace MainProject.Application.Features.Users.Commands.CreateUser
                 throw new InvalidOperationException("The specified email already exists.");
             }
 
-            var user = new User
-            {
-                Username = request.Username,
-                Email = request.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
-            };
+            var user = _mapper.Map<User>(request);
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             _userRepository.Add(user);
 

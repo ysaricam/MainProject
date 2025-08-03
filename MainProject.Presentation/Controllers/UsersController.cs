@@ -153,11 +153,13 @@ namespace MainProject.Presentation.Controllers
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
             var result = await _mediator.Send(command);
-            if (result == "Invalid username or password")
+            
+            if (result.Token == null || string.IsNullOrEmpty(result.Token))
             {
-                return Unauthorized(result);
+                return Unauthorized("Invalid username or password");
             }
-            return Ok(new { Token = result });
+            
+            return Ok(new { Token = result.Token });
         }
     }
 }

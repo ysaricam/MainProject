@@ -173,3 +173,7 @@
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/AutoMapper.dll
 /Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/yasin/Desktop/Projeler/MainProject/MainProject.Presentation/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

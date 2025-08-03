@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using MainProject.Domain.Interfaces;
 using MediatR;
 using System.Threading;
@@ -11,11 +12,13 @@ namespace MainProject.Application.Features.Branches.Commands.UpdateBranch
     {
         private readonly IRepository<Branch> _branchRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateBranchCommandHandler(IRepository<Branch> branchRepository, IUnitOfWork unitOfWork)
+        public UpdateBranchCommandHandler(IRepository<Branch> branchRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _branchRepository = branchRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(UpdateBranchCommand request, CancellationToken cancellationToken)
@@ -26,8 +29,7 @@ namespace MainProject.Application.Features.Branches.Commands.UpdateBranch
                 return false;
             }
 
-            branch.Name = request.Name;
-            branch.Description = request.Description;
+            _mapper.Map(request, branch);
 
             _branchRepository.Update(branch);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

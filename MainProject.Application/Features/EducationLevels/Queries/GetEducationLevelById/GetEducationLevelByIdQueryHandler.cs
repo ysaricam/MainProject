@@ -1,4 +1,7 @@
 
+
+using AutoMapper;
+using MainProject.Application.Features.EducationLevels.Dtos;
 using MainProject.Domain.Lessons;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -10,10 +13,12 @@ namespace MainProject.Application.Features.EducationLevels.Queries.GetEducationL
     public class GetEducationLevelByIdQueryHandler : IRequestHandler<GetEducationLevelByIdQuery, EducationLevelDto>
     {
         private readonly IRepository<EducationLevel> _educationLevelRepository;
+        private readonly IMapper _mapper;
 
-        public GetEducationLevelByIdQueryHandler(IRepository<EducationLevel> educationLevelRepository)
+        public GetEducationLevelByIdQueryHandler(IRepository<EducationLevel> educationLevelRepository, IMapper mapper)
         {
             _educationLevelRepository = educationLevelRepository;
+            _mapper = mapper;
         }
 
         public async Task<EducationLevelDto> Handle(GetEducationLevelByIdQuery request, CancellationToken cancellationToken)
@@ -25,19 +30,8 @@ namespace MainProject.Application.Features.EducationLevels.Queries.GetEducationL
                 return null;
             }
 
-            return new EducationLevelDto
-            {
-                Id = educationLevel.Id,
-                Name = educationLevel.Name,
-                Description = educationLevel.Description
-            };
+            return _mapper.Map<EducationLevelDto>(educationLevel);
         }
     }
-
-    public class EducationLevelDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
 }
+

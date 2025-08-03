@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using MainProject.Domain.Postings;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -12,23 +13,18 @@ namespace MainProject.Application.Features.Postings.Commands.CreatePosting
     {
         private readonly IRepository<Posting> _postingRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreatePostingCommandHandler(IRepository<Posting> postingRepository, IUnitOfWork unitOfWork)
+        public CreatePostingCommandHandler(IRepository<Posting> postingRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _postingRepository = postingRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(CreatePostingCommand request, CancellationToken cancellationToken)
         {
-            var posting = new Posting
-            {
-                Title = request.Title,
-                Content = request.Content,
-                Capacity = request.Capacity,
-                LessonId = request.LessonId,
-                TeacherId = request.TeacherId
-            };
+            var posting = _mapper.Map<Posting>(request);
 
             _postingRepository.Add(posting);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

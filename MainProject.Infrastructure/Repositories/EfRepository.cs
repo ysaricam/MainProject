@@ -24,7 +24,7 @@ namespace MainProject.Infrastructure.Repositories
 
         public async Task<T> GetByUsernameAsync(string username, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<User>().FirstOrDefaultAsync(u => u.Username == username, cancellationToken) as T;
+            return await _dbContext.Set<User>().Include(u => u.UserRoles).ThenInclude(ur => ur.Role).FirstOrDefaultAsync(u => u.Username == username, cancellationToken) as T;
         }
 
         public async Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default)

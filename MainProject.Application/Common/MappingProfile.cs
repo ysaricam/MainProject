@@ -22,6 +22,13 @@ namespace MainProject.Application.Common
             CreateMap<Lesson, LessonDto>();
             CreateMap<Posting, PostingDto>();
             CreateMap<Role, RoleDto>();
+
+            CreateMap<UserDto, User>();
+            CreateMap<BranchDto, Branch>();
+            CreateMap<EducationLevelDto, EducationLevel>();
+            CreateMap<LessonDto, Lesson>();
+            CreateMap<PostingDto, Posting>();
+            CreateMap<RoleDto, Role>();
         }
     }
 }

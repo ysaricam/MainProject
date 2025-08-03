@@ -1,3 +1,4 @@
+using AutoMapper;
 using MainProject.Domain.Users;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -8,11 +9,13 @@ namespace MainProject.Application.Features.Roles.Commands.UpdateRole
     {
         private readonly IRepository<Role> _roleRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateRoleCommandHandler(IRepository<Role> roleRepository, IUnitOfWork unitOfWork)
+        public UpdateRoleCommandHandler(IRepository<Role> roleRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _roleRepository = roleRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
@@ -21,7 +24,7 @@ namespace MainProject.Application.Features.Roles.Commands.UpdateRole
             if (role == null)
                 return false;
 
-            role.Name = request.Name;
+            _mapper.Map(request, role);
 
             _roleRepository.Update(role);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

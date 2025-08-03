@@ -1,4 +1,7 @@
 
+
+using AutoMapper;
+using MainProject.Application.Features.Lessons.Dtos;
 using MainProject.Domain.Lessons;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -10,10 +13,12 @@ namespace MainProject.Application.Features.Lessons.Queries.GetLessonById
     public class GetLessonByIdQueryHandler : IRequestHandler<GetLessonByIdQuery, LessonDto>
     {
         private readonly IRepository<Lesson> _lessonRepository;
+        private readonly IMapper _mapper;
 
-        public GetLessonByIdQueryHandler(IRepository<Lesson> lessonRepository)
+        public GetLessonByIdQueryHandler(IRepository<Lesson> lessonRepository, IMapper mapper)
         {
             _lessonRepository = lessonRepository;
+            _mapper = mapper;
         }
 
         public async Task<LessonDto> Handle(GetLessonByIdQuery request, CancellationToken cancellationToken)
@@ -25,21 +30,8 @@ namespace MainProject.Application.Features.Lessons.Queries.GetLessonById
                 return null;
             }
 
-            return new LessonDto
-            {
-                Id = lesson.Id,
-                Name = lesson.Name,
-                Description = lesson.Description,
-                BranchId = lesson.BranchId
-            };
+            return _mapper.Map<LessonDto>(lesson);
         }
     }
-
-    public class LessonDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Guid BranchId { get; set; }
-    }
 }
+

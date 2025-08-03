@@ -1,4 +1,5 @@
 
+using MainProject.Application.Features.Postings.Dtos;
 using MediatR;
 using System;
 

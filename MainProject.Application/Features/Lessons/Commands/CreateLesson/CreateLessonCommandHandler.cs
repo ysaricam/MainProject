@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using MainProject.Domain.Lessons;
 using MainProject.Domain.Interfaces;
 using MediatR;
@@ -11,22 +12,19 @@ namespace MainProject.Application.Features.Lessons.Commands.CreateLesson
     {
         private readonly IRepository<Lesson> _lessonRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
 
-        public CreateLessonCommandHandler(IRepository<Lesson> lessonRepository, IUnitOfWork unitOfWork)
+        public CreateLessonCommandHandler(IRepository<Lesson> lessonRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _lessonRepository = lessonRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
-            var lesson = new Lesson
-            {
-                Name = request.Name,
-                Description = request.Description,
-                BranchId = request.BranchId
-            };
+            var lesson = _mapper.Map<Lesson>(request);
 
             _lessonRepository.Add(lesson);
 
